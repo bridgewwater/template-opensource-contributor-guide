@@ -39,6 +39,9 @@ You can comment on the issue to let others know you're interested in working on 
 4. git commit use [https://www.conventionalcommits.org/](https://www.conventionalcommits.org/)
 
   - Can use command tools as: [cz-cli](https://github.com/commitizen/cz-cli#conventional-commit-messages-as-a-global-utility)
+
+![](https://github.com/commitizen/cz-cli/raw/master/meta/screenshots/add-commit.png)
+
   - vscode plugin `Conventional Commits`  [https://marketplace.visualstudio.com/items?itemName=vivaxy.vscode-conventional-commits](https://marketplace.visualstudio.com/items?itemName=vivaxy.vscode-conventional-commits)
 
 `Command + Shift + P` or `Ctrl + Shift + P` enter `Conventional Commits` or `cc `, and press `Enter`
