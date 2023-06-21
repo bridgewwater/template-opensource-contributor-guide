@@ -38,7 +38,7 @@ to suit your needs, removing or re-wording any sections that don't make sense fo
 
 ## Contributing
 
-[![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-v1.4-ff69b4.svg)](.github/CODE_OF_CONDUCT.md)
+[![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-v1.4-ff69b4.svg)](.github/CONTRIBUTING_DOC/CODE_OF_CONDUCT.md)
 
 We welcome community contributions to this project.
 
