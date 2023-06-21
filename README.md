@@ -42,7 +42,7 @@ to suit your needs, removing or re-wording any sections that don't make sense fo
 
 We welcome community contributions to this project.
 
-Please read [Contributor Guide](.github/CONTRIBUTING.md) for more information on how to get started.
+Please read [Contributor Guide](.github/CONTRIBUTING_DOC/CONTRIBUTING.md) for more information on how to get started.
 
 ## Feature
 
