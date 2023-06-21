@@ -10,7 +10,6 @@
 
 [![dependency-review](https://github.com/bridgewwater/template-opensource-contributor-guide/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/bridgewwater/template-opensource-contributor-guide/actions/workflows/dependency-review.yml)
 [![license](https://img.shields.io/github/license/bridgewwater/template-opensource-contributor-guide)](https://github.com/bridgewwater/template-opensource-contributor-guide)
-[![GitHub contributors](https://img.shields.io/github/contributors/bridgewwater/template-opensource-contributor-guide)](https://github.com/bridgewwater/template-opensource-contributor-guide)
 [![github release](https://img.shields.io/github/v/release/bridgewwater/template-opensource-contributor-guide?style=social)](https://github.com/bridgewwater/template-opensource-contributor-guide/releases)
 
 </div>
@@ -39,6 +38,7 @@ to suit your needs, removing or re-wording any sections that don't make sense fo
 ## Contributing
 
 [![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-v1.4-ff69b4.svg)](.github/CONTRIBUTING_DOC/CODE_OF_CONDUCT.md)
+[![GitHub contributors](https://img.shields.io/github/contributors/bridgewwater/template-opensource-contributor-guide)](https://github.com/bridgewwater/template-opensource-contributor-guide/graphs/contributors)
 
 We welcome community contributions to this project.
 
