@@ -1,0 +1,117 @@
+kind: pipeline
+type: docker
+name: basic-docker
+
+# platform: # https://docs.drone.io/yaml/docker/#the-platform-object
+#   os: windows
+#   arch: amd64
+
+# node: # https://docs.drone.io/yaml/docker/#the-node-attribute
+#   # DRONE_RUNNER_LABELS https://docs.drone.io/runner/exec/configuration/reference/drone-runner-labels/
+#   # https://docs.drone.io/pipeline/exec/syntax/routing/
+#   # role: xxxx # Specify the runner DRONE_RUNNER_LABELS labeled `role:xxxx` to execute the pipeline
+#   # DRONE_RUNNER_LABELS=docker_os:linux,docker_arch:amd64
+#   docker_os: linux   # install docker linux with amd64
+#   docker_arch: amd64
+#   # biz: web-front-end # web-api web-front-end cli-tools
+
+# https://docs.drone.io/pipeline/environment/syntax/#per-pipeline
+environment:
+  DRONE_DEBUG: true
+
+steps:
+  - name: env-init
+    image: sinlov/drone-env-printer:1.1.0
+    pull: if-not-exists
+    settings:
+      debug: false
+      # env_printer_padding_left_max: 42
+      # env_printer_print_keys:
+      #   - GOPATH
+      #   - GOBIN
+  - name: alpine-env
+    image: alpine:3.17
+    pull: if-not-exists
+    commands:
+      - "echo \"=> base  info\nDRONE_STAGE_MACHINE    ${DRONE_STAGE_MACHINE}\nDRONE_STAGE_OS         ${DRONE_STAGE_OS}\nDRONE_STAGE_ARCH       ${DRONE_STAGE_ARCH}\""
+      - "echo \"=> drone info\nDRONE_WORKSPACE        ${DRONE_WORKSPACE}\nDRONE_REPO_NAME        ${DRONE_REPO_NAME}\nDRONE_REPO_OWNER       ${DRONE_REPO_OWNER}\nDRONE_REPO             ${DRONE_REPO}\""
+      - "echo \"=> cvs   info\nDRONE_BRANCH           ${DRONE_BRANCH/\\//-}\nDRONE_COMMIT_SHA short ${DRONE_COMMIT_SHA:0:8}\nDRONE_TAG              ${DRONE_TAG##v}\""
+  - name: apline-init
+    image: alpine:3.17 # https://hub.docker.com/_/alpine/tags
+    pull: if-not-exists
+    commands:
+      - pwd
+      - echo "DRONE_REPO                 ${DRONE_REPO}"
+      - echo "DRONE_REPO_NAME            ${DRONE_REPO_NAME}"
+      - echo "DRONE_REPO_NAMESPACE       ${DRONE_REPO_NAMESPACE}"
+      - echo "DRONE_REMOTE_URL           ${DRONE_REMOTE_URL}"
+      - echo "DRONE_REPO_OWNER           ${DRONE_REPO_OWNER}"
+      - echo "DRONE_BRANCH               ${DRONE_BRANCH/\//-}"
+      - echo "DRONE_COMMIT_SHA short     ${DRONE_COMMIT_SHA:0:8}"
+      - echo "DRONE_COMMIT_AUTHOR        ${DRONE_COMMIT_AUTHOR}"
+      - echo "DRONE_COMMIT_AUTHOR_AVATAR ${DRONE_COMMIT_AUTHOR_AVATAR}"
+      - echo "DRONE_COMMIT_AUTHOR_EMAIL  ${DRONE_COMMIT_AUTHOR_EMAIL}"
+      - echo "DRONE_COMMIT_BRANCH        ${DRONE_COMMIT_BRANCH}"
+      - echo "DRONE_COMMIT_LINK          ${DRONE_COMMIT_LINK}"
+      # - "echo 'DRONE_COMMIT_MESSAGE       ${DRONE_COMMIT_MESSAGE}'"
+      - echo "DRONE_COMMIT_SHA           ${DRONE_COMMIT_SHA}"
+      - echo "DRONE_COMMIT_REF           ${DRONE_COMMIT_REF}"
+      - echo "DRONE_TAG                  ${DRONE_TAG##v}"
+      - echo "DRONE_STAGE_STARTED        ${DRONE_STAGE_STARTED}"
+      - echo "DRONE_STAGE_FINISHED       ${DRONE_STAGE_FINISHED}"
+      - echo "DRONE_BUILD_STATUS         ${DRONE_BUILD_STATUS}"
+      - echo "DRONE_BUILD_LINK           ${DRONE_BUILD_LINK}"
+      - echo "DRONE_BUILD_EVENT          ${DRONE_BUILD_EVENT}"
+      - echo "DRONE_BUILD_STARTED        ${DRONE_BUILD_STARTED}"
+      - echo "DRONE_BUILD_FINISHED       ${DRONE_BUILD_FINISHED}"
+      - echo "DRONE_ENV_PLUGIN_TOKEN     ${DRONE_ENV_PLUGIN_TOKEN}"
+      - echo "DRONE_TOKEN                ${DRONE_TOKEN}"
+      - "echo \"WORKDIR: $(pwd)\""
+      - cat build_cnt
+    when:
+      event:
+        - push
+  - name: notify-failure-feishu-robot
+    image: sinlov/drone-feishu-robot-oss:1.7.0-alpine
+    pull: if-not-exists
+    # image: sinlov/drone-feishu-group-robot:latest
+    depends_on: # https://docs.drone.io/pipeline/exec/syntax/parallelism/
+      - env-init
+      - alpine-env
+      - apline-init
+    settings:
+      # debug: true # plugin debug switch
+      # ntp_target: "pool.ntp.org" # if not set will not sync
+      # timeout_second: 10 # default 10
+      feishu_webhook:
+        from_secret: feishu_group_bot_token  # https://docs.drone.io/pipeline/environment/syntax/#from-secrets
+      feishu_secret:
+        from_secret: feishu_group_secret_bot
+      feishu_msg_title: "Drone CI Notification" # default [Drone CI Notification]
+      feishu_enable_forward: true # let notification card change more info see https://open.feishu.cn/document/ukTMukTMukTM/uAjNwUjLwYDM14CM2ATN
+      drone_system_admin_token: # non-essential parameter 1.5+
+        from_secret: drone_system_admin_token
+      # ignore last success by distance
+      feishu_ignore_last_success_by_admin_token_distance: 2 # if distance is 0 will not ignore, use 1 will let notify build change to success
+    when:
+      event: # https://docs.drone.io/pipeline/exec/syntax/conditions/#by-event
+        - promote
+        - rollback
+        - push
+        - pull_request
+        - tag
+      status: # only support failure/success, both open will send anything
+        - failure
+        - success
+
+trigger: # https://docs.drone.io/pipeline/triggers/
+  # branch:
+  #   - main
+  event:
+    - cron
+    - custom
+    - push
+    - pull_request
+    - tag
+    - promote
+    - rollback
