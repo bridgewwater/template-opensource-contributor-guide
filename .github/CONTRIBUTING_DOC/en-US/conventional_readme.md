@@ -1,0 +1,1 @@
+Please read [Contributor Guide](.github/CONTRIBUTING_DOC/en-US/CONTRIBUTING.md) for more information on how to get started.
