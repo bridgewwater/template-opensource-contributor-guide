@@ -1,0 +1,48 @@
+name: version
+
+on:
+  push:
+    branches:
+      - "main"
+  push:
+    tags:
+      - "*"
+
+permissions:
+  contents: write
+
+jobs:
+  version-check:
+    name: version-check
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # You can add more, for any target you'd like!
+        include:
+          - build: linux
+            os: ubuntu-latest
+            target: x86_64-unknown-linux-musl
+          # - build: macos
+          #   os: macos-latest
+          #   target: x86_64-apple-darwin
+          # - build: macos
+          #   os: windows-latest
+          #   target: x86_64-pc-windows-gnu
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: benjlevesque/short-sha@v2.2
+        id: short-sha
+        with:
+          length: 6
+      - name: Get version
+        id: get_version
+        run: |
+          echo ::set-output name=VERSION_BRANCH::${{ env.GITHUB_REF }}
+          echo ::set-output name=VERSION_TAG::${GITHUB_REF/refs\/tags\//}
+
+      - name: Check Version
+        run: |
+          echo "VERSION_HASH ${{ steps.short-sha.outputs.sha }}"
+          echo "VERSION_BRANCH ${{ steps.get_version.outputs.VERSION_BRANCH }}"
+          echo "VERSION_TAG ${{ steps.get_version.outputs.VERSION_TAG }}"
