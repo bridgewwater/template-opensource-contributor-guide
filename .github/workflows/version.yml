@@ -37,11 +37,11 @@ jobs:
       - name: Get version
         id: get_version
         run: |
-          echo "VERSION_BRANCH=${GITHUB_REF/refs\/heads\//}" >> $VERSION_BRANCH
-          echo "VERSION_TAG=${GITHUB_REF/refs\/tags\//}" >> $VERSION_TAG
+          echo "version_branch=${GITHUB_REF/refs\/heads\//}" >> $GIT_VERSION_BRANCH
+          echo "version_tag=${GITHUB_REF/refs\/tags\//}" >> $GET_VERSION_TAG
 
       - name: Check Version
         run: |
-          echo "VERSION_HASH => ${{ steps.short-sha.outputs.sha }}"
-          echo "VERSION_BRANCH ${{ steps.get_version.outputs.VERSION_BRANCH }}"
-          echo "VERSION_TAG ${{ steps.get_version.outputs.VERSION_TAG }}"
+          echo "short version hash => ${{ steps.short-sha.outputs.sha }}"
+          echo "GIT_VERSION_BRANCH ${{ env.version_branch }}"
+          echo "GET_VERSION_TAG ${{ env.version_tag }}"
