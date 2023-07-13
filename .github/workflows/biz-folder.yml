@@ -1,0 +1,40 @@
+name: biz
+
+on:
+  push:
+    branches:
+      - "main"
+    tags:
+      - "*"
+
+permissions:
+  contents: write
+
+jobs:
+  biz-folder:
+    name: biz-folder
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: biz-folder
+    strategy:
+      matrix:
+        # You can add more, for any target you'd like!
+        include:
+          - build: linux
+            os: ubuntu-latest
+          # - build: macos
+          #   os: macos-latest
+          # - build: windows
+          #   os: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Check env
+        run: |
+          pwd
+          echo "build => ${{ matrix.build }}"
+          echo "os => ${{ matrix.os }}"
+          echo "target => ${{ matrix.target }}"
