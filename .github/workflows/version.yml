@@ -37,7 +37,7 @@ jobs:
       - name: Get version
         id: get_version
         run: |
-          echo "VERSION_BRANCH=${ env.GITHUB_REF }" >> $VERSION_BRANCH
+          echo "VERSION_BRANCH=${{ env.GITHUB_REF }}" >> $VERSION_BRANCH
           echo "VERSION_TAG=${GITHUB_REF/refs\/tags\//}" >> $VERSION_TAG
 
       - name: Check Version
