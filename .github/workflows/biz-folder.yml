@@ -24,10 +24,10 @@ jobs:
         include:
           - build: linux
             os: ubuntu-latest
-          # - build: macos
-          #   os: macos-latest
-          # - build: windows
-          #   os: windows-latest
+          - build: macos
+            os: macos-latest
+          - build: windows
+            os: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
