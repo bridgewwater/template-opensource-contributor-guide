@@ -37,8 +37,8 @@ jobs:
       - name: Get version
         id: get_version
         run: |
-          echo "version_branch=${{ github.ref/refs\/heads\// }}" >> $GIT_VERSION_BRANCH
-          echo "version_tag=${{ github.ref/refs\/tags\// }}" >> $GET_VERSION_TAG
+          echo "version_branch=${{ GITHUB_REF/refs\/heads\// }}" >> $GIT_VERSION_BRANCH
+          echo "version_tag=${{ GITHUB_REF/refs\/tags\// }}" >> $GET_VERSION_TAG
 
       - name: Check Version
         run: |
