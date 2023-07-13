@@ -2,10 +2,16 @@ name: biz
 
 on:
   push:
-    branches:
-      - "main"
+    paths-ignore:
+      - '**/README.md'
+    branches: [ main ]
     tags:
       - "*"
+  pull_request:
+    paths-ignore:
+      - '**/README.md'
+    branches: [ main ]
+
 
 permissions:
   contents: write
