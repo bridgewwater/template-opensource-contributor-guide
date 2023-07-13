@@ -31,12 +31,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - uses: benjlevesque/short-sha@v2.2
+      - name: get hash
+        uses: benjlevesque/short-sha@v2.2
         id: short-sha
         with:
           length: 6
 
-      - uses: actions-ecosystem/action-get-latest-tag@v1
+      - name: get latest tag
+        uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
         if: ${{ steps.release-label.outputs.level != null }}
 
