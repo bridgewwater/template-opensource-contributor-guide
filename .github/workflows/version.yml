@@ -34,14 +34,12 @@ jobs:
         id: short-sha
         with:
           length: 6
-      - name: Get version
-        id: get_version
-        run: |
-          echo "version_branch=${GITHUB_REF/refs\/heads\//}" >> "$GIT_VERSION_BRANCH"
-          echo "version_tag=${GITHUB_REF/refs\/tags\//}" >> "$GET_VERSION_TAG"
+      - uses: actions-ecosystem/action-get-latest-tag@v1
+        id: get-latest-tag
+        if: ${{ steps.release-label.outputs.level != null }}
+
 
       - name: Check Version
         run: |
           echo "short version hash => ${{ steps.short-sha.outputs.sha }}"
-          echo "GIT_VERSION_BRANCH ${{ env.version_branch }}"
-          echo "GET_VERSION_TAG ${{ env.version_tag }}"
+          echo "get-latest-tag ${{ steps.get-latest-tag.outputs.tag }}"
