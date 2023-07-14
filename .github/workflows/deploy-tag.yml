@@ -24,7 +24,7 @@ permissions:
   discussions: write
 
 jobs:
-  archive:
+  repo-release:
     name: repo-release
     runs-on: ubuntu-latest
     steps:
