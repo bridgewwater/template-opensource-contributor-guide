@@ -13,7 +13,7 @@ on:
         description: 'tag changes, if not tag will null'
         value: ${{ jobs.version-check.outputs.tag_changes }}
       tag_status:
-        description: 'tag status, if not tag will null, will be prereleased, patch, minor, major'
+        description: 'tag status, if not tag will null, will be prereleased, unreleased, patch, minor, major'
         value: ${{ jobs.version-check.outputs.tag_status }}
 
 jobs:
