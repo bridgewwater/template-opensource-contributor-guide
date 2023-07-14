@@ -8,6 +8,20 @@ on:
         default: ''
         required: false
         type: string
+      upload_artifact_name:
+        description: 'upload artifact name'
+        default: 'biz-folder'
+        required: false
+        type: string
+      tag_name:
+        description: 'version tag name, if is null, will not build archive'
+        default: ''
+        required: false
+        type: string
+
+env:
+  WORK_DIR: biz-folder
+  EXEC_BINARY_NAME: biz-bin
 
 jobs:
   biz-folder:
@@ -16,7 +30,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: biz-folder
+        working-directory: ${{ env.WORK_DIR }}
     strategy:
       matrix: # https://docs.github.com/actions/using-jobs/using-a-matrix-for-your-jobs#expanding-or-adding-matrix-configurations
         # You can add more, for any target you'd like!
@@ -37,3 +51,49 @@ jobs:
           echo "build => ${{ matrix.build }}"
           echo "os => ${{ matrix.os }}"
           echo "inputs.short_sha => ${{ inputs.short_sha }}"
+
+      - name: Build archive
+        if: ${{ inputs.tag_name != null }}
+        shell: bash
+        run: |
+          # Replace with the name of your binary
+          binary_name=${{ env.EXEC_BINARY_NAME }}
+
+          dirname="$binary_name-${{ matrix.build }}-${{ inputs.tag_name }}-${{ inputs.short_sha }}"
+          mkdir "$dirname"
+
+          if [ "${{ matrix.os }}" = "windows-latest" ]; then
+            mv "windows" "$dirname"
+          else
+            mv "unix" "$dirname"
+          fi
+
+          # add more resource to archive
+          mv doc.md "$dirname"
+
+          if [ "${{ matrix.os }}" = "windows-latest" ]; then
+            7z a "$dirname.zip" "$dirname"
+            certutil -hashfile "$dirname.zip" SHA256 >> "$dirname.zip.sha256"
+            echo "ASSET=$dirname.zip" >> $GITHUB_ENV
+          else
+            tar -czf "$dirname.tar.gz" "$dirname"
+            sha256sum "$dirname.tar.gz" >> "$dirname.tar.gz.sha256"
+            echo "ASSET=$dirname.tar.gz" >> $GITHUB_ENV
+          fi
+
+      - name: Check Release archive
+        if: ${{ inputs.tag_name != null }}
+        run: |
+          echo "release archive at: ${{ env.ASSET }}"
+          echo " archive sha256sum at: ${{ env.ASSET }}.sha256"
+
+      - name: upload-artifact
+        uses: actions/upload-artifact@v3
+        if: ${{ inputs.tag_name != null }}
+        with:
+          name: ${{ inputs.upload_artifact_name }}
+          retention-days: 5
+          if-no-files-found: error
+          path: |
+            ${{ env.WORK_DIR }}/${{ env.ASSET }}
+            ${{ env.WORK_DIR }}/${{ env.ASSET }}.sha256

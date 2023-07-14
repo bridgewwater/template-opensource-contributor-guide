@@ -1,6 +1,7 @@
 ### project setting
 
 *.log
+dist/
 
 ### IDE
 
