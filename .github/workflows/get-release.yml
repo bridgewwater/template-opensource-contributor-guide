@@ -1,4 +1,4 @@
-name: version
+name: get-release
 
 on:
   workflow_call: # https://docs.github.com/actions/using-workflows/reusing-workflows#using-inputs-and-secrets-in-a-reusable-workflow
@@ -6,9 +6,18 @@ on:
       short_sha:
         description: 'version short hash of the commit size 8'
         value: ${{ jobs.version-check.outputs.short_sha }}
+      id:
+        description: 'version id'
+        value: ${{ jobs.version-check.outputs.id }}
       tag_name:
         description: 'tag name, if not tag will null'
         value: ${{ jobs.version-check.outputs.tag_name }}
+      html_url:
+        description: 'upload html, if not tag will null'
+        value: ${{ jobs.version-check.outputs.html_url }}
+      upload_url:
+        description: 'upload url, if not tag will null'
+        value: ${{ jobs.version-check.outputs.upload_url }}
 
 jobs:
   version-check:
@@ -29,8 +38,10 @@ jobs:
           #   target: x86_64-pc-windows-gnu
     outputs:
       short_sha: ${{ steps.short-sha.outputs.sha }}
-      tag_name: ${{ steps.get_tag.outputs.tag }}
-
+      id: ${{ steps.get_release.outputs.id }}
+      tag_name: ${{ steps.get_release.outputs.tag_name }}
+      html_url: ${{ steps.get_release.outputs.html_url }}
+      upload_url: ${{ steps.get_release.outputs.upload_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -41,14 +52,17 @@ jobs:
         with:
           length: 8
 
-      - name: get tag
-        id: get_tag
-        uses: olegtarasov/get-tag@v2.1.2
+      - name: get release
+        id: get_release
+        uses: bruceadams/get-release@v1.3.2
         if: startsWith(github.ref, 'refs/tags/')
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Check Version
         run: |
-          echo "get short version hash => ${{ steps.short-sha.outputs.sha }}"
-          echo "get tag_name => ${{ steps.get_tag.outputs.tag }}"
+          echo "short version hash => ${{ steps.short-sha.outputs.sha }}"
+          echo "get release id => ${{ steps.get_release.outputs.id }}"
+          echo "get release tag_name => ${{ steps.get_release.outputs.tag_name }}"
+          echo "get release html_url => ${{ steps.get_release.outputs.html_url }}"
+          echo "get release upload_url => ${{ steps.get_release.outputs.upload_url }}"
