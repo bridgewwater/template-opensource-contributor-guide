@@ -1,9 +1,7 @@
 name: deploy
 
 on:
-  push:
-    tags:
-      - '*' # Push events to matching *, i.e. 1.0.0 v1.0, v20.15.10
+  workflow_call: # https://docs.github.com/actions/using-workflows/reusing-workflows#using-inputs-and-secrets-in-a-reusable-workflow
 
 permissions:
   contents: write
@@ -24,7 +22,7 @@ jobs:
           token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: true
           # body: "this is pre-release"
-          # body_path: ${{ github.workspace }}-CHANGELOG.txt
+          body_path: ${{ github.workspace }}-CHANGELOG.txt
           # https://github.com/isaacs/node-glob
           # files: |
           #   **/*.tar.gz

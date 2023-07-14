@@ -2,9 +2,12 @@ name: biz-folder
 
 on:
   workflow_call: # https://docs.github.com/actions/using-workflows/reusing-workflows#using-inputs-and-secrets-in-a-reusable-workflow
-
-permissions:
-  contents: write
+    inputs:
+      short_sha:
+        description: 'version short hash of the commit size 8'
+        default: ''
+        required: false
+        type: string
 
 jobs:
   biz-folder:
@@ -33,3 +36,4 @@ jobs:
           pwd
           echo "build => ${{ matrix.build }}"
           echo "os => ${{ matrix.os }}"
+          echo "inputs.short_sha => ${{ inputs.short_sha }}"

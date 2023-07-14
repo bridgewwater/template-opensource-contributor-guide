@@ -4,16 +4,28 @@ on:
   push:
     paths-ignore:
       - '**/README.md'
-    branches: [ main ]
+    branches:
+      - main
+    tags:
+      - '*' # Push events to matching *, i.e. 1.0.0 v1.0, v20.15.10
   pull_request:
     paths-ignore:
       - '**/README.md'
-    branches: [ main ]
+    branches:
+      - main
 
 permissions:
   contents: write
+  discussions: write
 
 jobs:
+  version:
+    name: version
+    uses: ./.github/workflows/version.yml
   biz-folder:
+    needs:
+      - version
     name: biz-folder
     uses: ./.github/workflows/biz-folder.yml
+    with:
+      short_sha: ${{ needs.version.outputs.short_sha }}

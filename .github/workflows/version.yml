@@ -1,19 +1,29 @@
 name: version
 
 on:
-  push:
-    paths-ignore:
-      - '**/README.md'
-    branches: [ main ]
-    tags:
-      - "*"
-  pull_request:
-    paths-ignore:
-      - '**/README.md'
-    branches: [ main ]
-
-permissions:
-  contents: write
+  workflow_call: # https://docs.github.com/actions/using-workflows/reusing-workflows#using-inputs-and-secrets-in-a-reusable-workflow
+    outputs:
+      short_sha:
+        description: 'version short hash of the commit size 8'
+        value: ${{ jobs.version-check.outputs.short_sha }}
+      id:
+        description: 'version id'
+        value: ${{ jobs.version-check.outputs.id }}
+      tag_name:
+        description: 'tag name, if not tag will null'
+        value: ${{ jobs.version-check.outputs.tag_name }}
+      html_url:
+        description: 'upload html, if not tag will null'
+        value: ${{ jobs.version-check.outputs.html_url }}
+      upload_url:
+        description: 'upload url, if not tag will null'
+        value: ${{ jobs.version-check.outputs.upload_url }}
+      release_level:
+        description: 'release level from pull_request merged, if not true will null'
+        value: ${{ jobs.version-check.outputs.release_level }}
+      release_lastest_tag:
+        description: 'release lastest tag from pull_request merged, if not true will null'
+        value: ${{ jobs.version-check.outputs.release_lastest_tag }}
 
 jobs:
   version-check:
@@ -32,6 +42,14 @@ jobs:
           # - build: windows
           #   os: windows-latest
           #   target: x86_64-pc-windows-gnu
+    outputs:
+      short_sha: ${{ steps.short-sha.outputs.sha }}
+      id: ${{ steps.get_release.outputs.id }}
+      tag_name: ${{ steps.get_release.outputs.tag_name }}
+      html_url: ${{ steps.get_release.outputs.html_url }}
+      upload_url: ${{ steps.get_release.outputs.upload_url }}
+      release_level:  ${{ steps.release-label.outputs.level}}
+      release_lastest_tag: ${{ steps.get-latest-tag.outputs.tag }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -40,7 +58,7 @@ jobs:
         uses: benjlevesque/short-sha@v2.2
         id: short-sha
         with:
-          length: 6
+          length: 8
 
       - name: get release
         id: get_release
