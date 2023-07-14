@@ -10,7 +10,7 @@ on:
         type: string
       upload_artifact_name:
         description: 'upload artifact name'
-        default: 'biz-folder'
+        default: ''
         required: false
         type: string
       tag_name:
@@ -89,7 +89,7 @@ jobs:
 
       - name: upload-artifact
         uses: actions/upload-artifact@v3
-        if: ${{ inputs.tag_name != null }}
+        if: ${{ inputs.upload_artifact_name != null }}
         with:
           name: ${{ inputs.upload_artifact_name }}
           retention-days: 5
