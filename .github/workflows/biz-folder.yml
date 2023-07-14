@@ -12,7 +12,6 @@ on:
       - '**/README.md'
     branches: [ main ]
 
-
 permissions:
   contents: write
 
@@ -25,7 +24,7 @@ jobs:
         shell: bash
         working-directory: biz-folder
     strategy:
-      matrix:
+      matrix: # https://docs.github.com/actions/using-jobs/using-a-matrix-for-your-jobs#expanding-or-adding-matrix-configurations
         # You can add more, for any target you'd like!
         include:
           - build: linux
@@ -43,4 +42,3 @@ jobs:
           pwd
           echo "build => ${{ matrix.build }}"
           echo "os => ${{ matrix.os }}"
-          echo "target => ${{ matrix.target }}"
