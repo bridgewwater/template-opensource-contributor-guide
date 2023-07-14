@@ -1,16 +1,7 @@
-name: biz
+name: biz-folder
 
 on:
-  push:
-    paths-ignore:
-      - '**/README.md'
-    branches: [ main ]
-    tags:
-      - "*"
-  pull_request:
-    paths-ignore:
-      - '**/README.md'
-    branches: [ main ]
+  workflow_call: # https://docs.github.com/actions/using-workflows/reusing-workflows#using-inputs-and-secrets-in-a-reusable-workflow
 
 permissions:
   contents: write

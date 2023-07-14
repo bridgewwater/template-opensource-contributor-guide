@@ -1,0 +1,19 @@
+name: ci
+
+on:
+  push:
+    paths-ignore:
+      - '**/README.md'
+    branches: [ main ]
+  pull_request:
+    paths-ignore:
+      - '**/README.md'
+    branches: [ main ]
+
+permissions:
+  contents: write
+
+jobs:
+  biz-folder:
+    name: biz-folder
+    uses: ./.github/workflows/biz-folder.yml
