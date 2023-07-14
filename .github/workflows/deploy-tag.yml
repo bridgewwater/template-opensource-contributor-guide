@@ -13,6 +13,11 @@ on:
         default: ''
         required: false
         type: string
+      tag_changes:
+        description: 'tag changes, if not tag will null'
+        default: ''
+        required: false
+        type: string
       download_artifact_name:
         description: 'download artifact name, if not set will not use download_artifact'
         default: ''
@@ -56,10 +61,10 @@ jobs:
           ## with permissions to create releases in the other repo
           token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: ${{inputs.prerelease}}
-          # body: "this is pre-release"
-          body_path: ${{ github.workspace }}/CHANGELOG.md
+          body: "${{ inputs.tag_changes }}"
+          # body_path: ${{ github.workspace }}/CHANGELOG.md
           # https://github.com/isaacs/node-glob
-          # files: |
-          #   **/*.zip
-          #   **/*.tar.gz
-          #   **/*.sha256
+          files: |
+            **/*.zip
+            **/*.tar.gz
+            **/*.sha256

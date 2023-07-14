@@ -9,6 +9,12 @@ on:
       tag_name:
         description: 'tag name, if not tag will null'
         value: ${{ jobs.version-check.outputs.tag_name }}
+      tag_changes:
+        description: 'tag changes, if not tag will null'
+        value: ${{ jobs.version-check.outputs.tag_changes }}
+      tag_status:
+        description: 'tag status, if not tag will null, will be prereleased, patch, minor, major'
+        value: ${{ jobs.version-check.outputs.tag_status }}
 
 jobs:
   version-check:
@@ -30,6 +36,8 @@ jobs:
     outputs:
       short_sha: ${{ steps.short-sha.outputs.sha }}
       tag_name: ${{ steps.get_tag.outputs.tag }}
+      tag_changes: ${{ steps.changelog_reader.outputs.changes }}
+      tag_status: ${{ steps.changelog_reader.outputs.status }}
 
     steps:
       - name: Checkout
@@ -48,7 +56,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
+      - name: get changelog
+        id: changelog_reader
+        uses: artlaman/conventional-changelog-reader-action@v1.1.0
+        with:
+          version: ${GITHUB_REF#refs/tags/v}
+          path: ./CHANGELOG.md
+
       - name: Check Version
         run: |
           echo "get short version hash => ${{ steps.short-sha.outputs.sha }}"
           echo "get tag_name => ${{ steps.get_tag.outputs.tag }}"
+          echo "get changelog_reader.version => ${{ steps.changelog_reader.outputs.version }}"
+          echo "get changelog_reader.changes => ${{ steps.changelog_reader.outputs.changes }}"
+          echo "get changelog_reader.status => ${{ steps.changelog_reader.outputs.status }}"
