@@ -57,7 +57,7 @@ jobs:
           token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: ${{inputs.prerelease}}
           # body: "this is pre-release"
-          body_path: ${{ github.workspace }}-CHANGELOG.txt
+          body_path: ${{ github.workspace }}/CHANGELOG.md
           # https://github.com/isaacs/node-glob
           # files: |
           #   **/*.zip
