@@ -2,6 +2,7 @@
 
 *.log
 dist/
+CHANGELOG.txt
 
 ### IDE
 
