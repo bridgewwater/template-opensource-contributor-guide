@@ -64,7 +64,7 @@ jobs:
 
       - name: get changelog
         id: changelog_reader
-        uses: mindsers/changelog-reader-action@v2
+        uses: artlaman/conventional-changelog-reader-action@v1.1.0
         if: startsWith(github.ref, 'refs/tags/')
         with:
           version: ${{ steps.tag_name.outputs.current_version }}
