@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/bridgewwater/template-opensource-contributor-guide/compare/v1.0.1...v1.1.0) (2023-07-14)
+
+
+### 👷‍ Build System
+
+* update MINOR version to release ([2cbc2be](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/2cbc2be11c4c2268ac4bd608ac85053aa9ca349d))
+
 ### [1.0.1](https://github.com/bridgewwater/template-opensource-contributor-guide/compare/v1.0.0...v1.0.1) (2023-07-14)
 
 
