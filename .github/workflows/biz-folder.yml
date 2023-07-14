@@ -71,13 +71,13 @@ jobs:
           # add more resource to archive
           mv doc.md "$dirname"
 
-          if [ "${{ matrix.os }}" = "windows-latest" ]; then
+          if [ "${{ matrix.build }}" = "windows" ]; then
             7z a "$dirname.zip" "$dirname"
             certutil -hashfile "$dirname.zip" SHA256 >> "$dirname.zip.sha256"
             echo "ASSET=$dirname.zip" >> $GITHUB_ENV
           else
             tar -czf "$dirname.tar.gz" "$dirname"
-            sha256sum "$dirname.tar.gz" >> "$dirname.tar.gz.sha256"
+            shasum -a 256 "$dirname.tar.gz" >> "$dirname.tar.gz.sha256"
             echo "ASSET=$dirname.tar.gz" >> $GITHUB_ENV
           fi
 
