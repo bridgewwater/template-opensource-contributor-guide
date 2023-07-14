@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/bridgewwater/template-opensource-contributor-guide/compare/v1.1.0...v1.1.1) (2023-07-14)
+
+
+### 👷‍ Build System
+
+* change upload_artifact_name default empty ([be01bb1](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/be01bb142eed90a944a39a92a294cad736f3c129))
+
 ## [1.1.0](https://github.com/bridgewwater/template-opensource-contributor-guide/compare/v1.0.1...v1.1.0) (2023-07-14)
 
 
