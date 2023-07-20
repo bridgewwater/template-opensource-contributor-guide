@@ -16,8 +16,8 @@ name: basic-docker
 #   # biz: web-front-end # web-api web-front-end cli-tools
 
 # https://docs.drone.io/pipeline/environment/syntax/#per-pipeline
-environment:
-  DRONE_DEBUG: true
+# environment:
+#   DRONE_DEBUG: true
 
 steps:
   - name: env-init
