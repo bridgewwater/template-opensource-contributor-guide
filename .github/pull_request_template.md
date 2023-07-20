@@ -2,7 +2,7 @@
 name: Feature request
 about: Changes product or feature request
 ref: "main"
-title: '[enhancement] '
+title: '[enhancement]'
 assignees: ''
 labels:
   - enhancement
