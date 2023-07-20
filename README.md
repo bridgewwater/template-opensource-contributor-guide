@@ -8,7 +8,7 @@
 
 <!--- FIXME: Update crate, repo and CI workflow names here! Remove any that are not relevant --->
 
-[![dependency-review](https://github.com/bridgewwater/template-opensource-contributor-guide/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/bridgewwater/template-opensource-contributor-guide/actions/workflows/dependency-review.yml)
+[![ci](https://github.com/bridgewwater/template-opensource-contributor-guide/actions/workflows/ci.yml/badge.svg)](https://github.com/bridgewwater/template-opensource-contributor-guide/actions/workflows/ci.yml)
 [![license](https://img.shields.io/github/license/bridgewwater/template-opensource-contributor-guide)](https://github.com/bridgewwater/template-opensource-contributor-guide)
 [![github release](https://img.shields.io/github/v/release/bridgewwater/template-opensource-contributor-guide?style=social)](https://github.com/bridgewwater/template-opensource-contributor-guide/releases)
 
