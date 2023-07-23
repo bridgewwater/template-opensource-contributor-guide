@@ -59,12 +59,13 @@ jobs:
         echo "this PR github.base_ref ${{ github.base_ref }}"
         echo "this PR github.head_ref ${{ github.head_ref }}"
 
-  tag-from-pr:
+  tag-from-pr-main:
     needs:
       - version
       - biz-folder
-    uses: ./.github/workflows/tag-from-pr.yml
     if: ${{ github.event.pull_request.merged == true && github.base_ref == 'main' }}
+    uses: ./.github/workflows/tag-from-pr.yml
+    secrets: inherit
 
   deploy-tag:
     needs:
