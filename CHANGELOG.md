@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.1](https://github.com/bridgewwater/template-opensource-contributor-guide/compare/v1.5.0...v1.5.1) (2023-07-23)
+
 ## 1.5.0 (2023-07-23)
 
 * Merge pull request #22 from bridgewwater/release-1.5.0 ([32c17c7](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/32c17c7)), closes [#22](https://github.com/bridgewwater/template-opensource-contributor-guide/issues/22)
