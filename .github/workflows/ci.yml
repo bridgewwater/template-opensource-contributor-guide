@@ -25,12 +25,56 @@ on:
       - 'PU-*'
       - 'DOC-*'
       - 'hotfix-*'
+  pull_request_target:
+    paths-ignore:
+      - '**/README.md'
+    types:
+      - closed
+    branches:
+      - 'releases/**'
 
 permissions:
   contents: write
   discussions: write
 
 jobs:
+  info_print:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo " CI ${CI}"
+          echo " RUNNER_DEBUG ${RUNNER_DEBUG}"
+          echo " RUNNER_OS ${RUNNER_OS}"
+          echo " runner.os ${{ runner.os }}"
+          echo " RUNNER_ARCH ${RUNNER_ARCH}"
+          echo " GITHUB_ACTION ${GITHUB_ACTION}"
+          echo " GITHUB_ACTIONS ${GITHUB_ACTIONS}"
+          echo " GITHUB_SHA ${GITHUB_SHA}"
+          echo " GITHUB_REF ${GITHUB_REF}"
+          echo " GITHUB_BASE_REF ${GITHUB_BASE_REF}"
+          echo " GITHUB_HEAD_REF ${GITHUB_HEAD_REF}"
+          echo " GITHUB_REF_NAME ${GITHUB_REF_NAME}"
+          echo " GITHUB_EVENT_NAME ${GITHUB_EVENT_NAME}"
+          echo " GITHUB_JOB ${GITHUB_JOB}"
+          echo " GITHUB_REPOSITORY ${GITHUB_REPOSITORY}"
+          echo " GITHUB_REPOSITORY_OWNER ${GITHUB_REPOSITORY_OWNER}"
+          echo " GITHUB_REPOSITORY_OWNER ${GITHUB_REPOSITORY_OWNER}"
+          echo " github.event_name ${{ github.event_name }}"
+          echo " github.ref ${{ github.ref }}"
+
+
+  if-merged-main:
+    if: ${{ github.event.pull_request.merged == true && github.base_ref == 'main' }}
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo The PR was merged main
+        echo "this PR GITHUB_REF ${GITHUB_REF}"
+        echo "this PR github.event_name ${{ github.event_name }}"
+        echo "this PR github.ref ${{ github.ref }}"
+        echo "this PR github.base_ref ${{ github.base_ref }}"
+        echo "this PR github.head_ref ${{ github.head_ref }}"
+
   version:
     name: version
     uses: ./.github/workflows/version.yml
@@ -46,18 +90,6 @@ jobs:
       short_sha: ${{ needs.version.outputs.short_sha }}
       upload_artifact_name: biz-folder
       tag_name: ${{ needs.version.outputs.tag_name }}
-
-  # if-merged-main:
-  #   if: ${{ github.event.pull_request.merged == true && github.base_ref == 'main' }}
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - run: |
-  #       echo The PR was merged main
-  #       echo "this PR GITHUB_REF ${GITHUB_REF}"
-  #       echo "this PR github.event_name ${{ github.event_name }}"
-  #       echo "this PR github.ref ${{ github.ref }}"
-  #       echo "this PR github.base_ref ${{ github.base_ref }}"
-  #       echo "this PR github.head_ref ${{ github.head_ref }}"
 
   tag-from-pr-main:
     needs:
