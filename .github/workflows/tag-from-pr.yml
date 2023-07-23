@@ -19,12 +19,12 @@ jobs:
         uses: convention-change/action-standard-version@main
         with:
           release-by-ref: ${{ github.head_ref }}
-          dry-run: true
+          # dry-run: true
 
-      # - name: Push changes
-      #   uses: ad-m/github-push-action@master
-      #   if: ${{ github.event.pull_request.merged == true }}
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     branch: ${{ github.ref }}
-      #     tags: true
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        if: ${{ github.event.pull_request.merged == true }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          tags: true
