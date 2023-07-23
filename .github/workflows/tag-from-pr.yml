@@ -1,0 +1,31 @@
+name: tag-from-pr
+
+on:
+  workflow_call: # https://docs.github.com/actions/using-workflows/reusing-workflows#using-inputs-and-secrets-in-a-reusable-workflow
+
+jobs:
+  tag-standard-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure committer
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+      - name: Bump version
+        uses: yashanand1910/standard-release-notes@v1.3.0
+        if: ${{ github.event.pull_request.merged == true }}
+        with:
+          changelog_path: CHANGELOG.md
+          version: ${{ github.event.inputs.version }}
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        if: ${{ github.event.pull_request.merged == true }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          tags: true
