@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.5.0 (2023-07-23)
+
+* Merge pull request #22 from bridgewwater/release-1.5.0 ([32c17c7](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/32c17c7)), closes [#22](https://github.com/bridgewwater/template-opensource-contributor-guide/issues/22)
+* Merge pull request #23 from bridgewwater/release-1.5.0 ([07d7749](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/07d7749)), closes [#23](https://github.com/bridgewwater/template-opensource-contributor-guide/issues/23)
+* Merge pull request #24 from bridgewwater/release-1.5.0 ([4483bc9](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/4483bc9)), closes [#24](https://github.com/bridgewwater/template-opensource-contributor-guide/issues/24)
+* feat: change to git config --local user.email and name to github-acitons ([674c401](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/674c401))
+* feat: update Configure committer at tag-from-pr.yml ([75416f5](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/75416f5))
+* fix: change other args at release by PR ([f5a0936](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/f5a0936))
+* fix: get github.event.sender info ([13d60bf](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/13d60bf))
+* fix: let tag-from-pr use all history for all tags and branches ([bec7b6d](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/bec7b6d))
+* fix: use yashanand1910/standard-release-notes@v1.3.0 to get release_notes ([6cb9b5b](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/6cb9b5b))
+* ci: change get_release_notes at tags ([0182da7](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/0182da7))
+* ci: try github.event.pusher ([27d114f](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/27d114f))
+* chore(release): 1.4.1 ([2148a68](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/2148a68))
+
+
+
 ### [1.4.1](https://github.com/bridgewwater/template-opensource-contributor-guide/compare/v1.4.0...v1.4.1) (2023-07-23)
 
 ## 1.4.0 (2023-07-23)
