@@ -10,7 +10,8 @@ on:
   pull_request:
     paths-ignore:
       - '**/README.md'
-    branches: [ main ]
+    branches:
+      - 'release-*'
 
 permissions:
   contents: read
