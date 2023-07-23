@@ -24,7 +24,7 @@ jobs:
       - name: Push change and tag
         run: |
           git config --local --add safe.directory .
-          git push --follow-tags origin ${{ github.head_ref }}
+          git push --follow-tags origin ${{ github.ref }}
 
       # - name: Push changes
       #   uses: ad-m/github-push-action@master
