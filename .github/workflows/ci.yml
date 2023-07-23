@@ -48,6 +48,8 @@ jobs:
           echo " github.event_name ${{ github.event_name }}"
           echo " github.event.pusher.name ${{ github.event.pusher.name }}"
           echo " github.event.pusher.email ${{ github.event.pusher.email }}"
+          echo " github.event.sender.name ${{ github.event.sender.name }}"
+          echo " github.event.sender.email ${{ github.event.sender.email }}"
           echo ""
           echo " GITHUB_SHA ${GITHUB_SHA}"
           echo " GITHUB_REF_TYPE ${GITHUB_REF_TYPE}"
