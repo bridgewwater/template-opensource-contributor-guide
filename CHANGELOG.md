@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## 1.3.0 (2023-07-23)
 
+* Merge pull request #17 from bridgewwater/release-1.3.0 ([90e6180](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/90e6180)), closes [#17](https://github.com/bridgewwater/template-opensource-contributor-guide/issues/17)
+
+
+
+## 1.3.0 (2023-07-23)
+
 * Merge pull request #16 from bridgewwater/release-1.3.0 ([12d8115](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/12d8115)), closes [#16](https://github.com/bridgewwater/template-opensource-contributor-guide/issues/16)
 
 
