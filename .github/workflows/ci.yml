@@ -46,6 +46,8 @@ jobs:
           echo " GITHUB_JOB ${GITHUB_JOB}"
           echo " GITHUB_EVENT_NAME ${GITHUB_EVENT_NAME}"
           echo " github.event_name ${{ github.event_name }}"
+          echo " github.event.sender.name ${{ github.event.sender.name }}"
+          echo " github.event.sender.email ${{ github.event.sender.email }}"
           echo ""
           echo " GITHUB_SHA ${GITHUB_SHA}"
           echo " GITHUB_REF_TYPE ${GITHUB_REF_TYPE}"
