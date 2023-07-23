@@ -48,6 +48,17 @@ jobs:
       upload_artifact_name: biz-folder
       tag_name: ${{ needs.version.outputs.tag_name }}
 
+  if_merged:
+    if: ${{ github.event.pull_request.merged == true }}
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo The PR was merged
+        echo "this PR github.event_name ${{ github.event_name }}"
+        echo "this PR github.ref ${{ github.ref }}"
+        echo "this PR github.base_ref ${{ github.base_ref }}"
+        echo "this PR github.head_ref ${{ github.head_ref }}"
+
   deploy-tag:
     needs:
       - version
