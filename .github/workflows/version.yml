@@ -15,6 +15,9 @@ on:
       tag_status:
         description: 'tag status, if not tag will null, will be prereleased, unreleased, patch, minor, major'
         value: ${{ jobs.version-check.outputs.tag_status }}
+      release_notes:
+        description: 'release notes, if not tag will null'
+        value: ${{ jobs.version-check.outputs.release_notes }}
 
 jobs:
   version-check:
@@ -38,6 +41,7 @@ jobs:
       tag_name: ${{ steps.get_tag.outputs.tag }}
       tag_changes: ${{ steps.changelog_reader.outputs.changes }}
       tag_status: ${{ steps.changelog_reader.outputs.status }}
+      release_notes: ${{ steps.get_release_notes.outputs.release_notes }}
 
     steps:
       - name: Checkout
@@ -70,10 +74,18 @@ jobs:
           version: ${{ steps.tag_name.outputs.current_version }}
           path: ./CHANGELOG.md
 
-      - name: Check Version
+      - name: Get release notes
+        id: get_release_notes
+        uses: yashanand1910/standard-release-notes@v1.3.0
+        with:
+          version: ${{ github.ref }} # Required
+          # changelog_path: ./CHANGELOG.md # Optional
+
+      - name: Check Outputs
         run: |
           echo "get short version hash => ${{ steps.short-sha.outputs.sha }}"
           echo "get tag_name => ${{ steps.get_tag.outputs.tag }}"
           echo "get changelog_reader.version => ${{ steps.changelog_reader.outputs.version }}"
           echo "get changelog_reader.changes => ${{ steps.changelog_reader.outputs.changes }}"
           echo "get changelog_reader.status => ${{ steps.changelog_reader.outputs.status }}"
+          echo "get steps.get_release_notes.outputs.release_notes => ${{ steps.get_release_notes.outputs.release_notes }}"
