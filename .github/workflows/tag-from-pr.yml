@@ -15,17 +15,16 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
 
-      - name: Bump version
-        uses: yashanand1910/standard-release-notes@v1.3.0
-        if: ${{ github.event.pull_request.merged == true }}
+      - name: create-standard-version
+        uses: convention-change/action-standard-version@main
         with:
-          changelog_path: CHANGELOG.md
-          version: ${{ github.event.inputs.version }}
+          release-by-ref: ${{ github.head_ref }}
+          dry-run: true
 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        if: ${{ github.event.pull_request.merged == true }}
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
-          tags: true
+      # - name: Push changes
+      #   uses: ad-m/github-push-action@master
+      #   if: ${{ github.event.pull_request.merged == true }}
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: ${{ github.ref }}
+      #     tags: true
