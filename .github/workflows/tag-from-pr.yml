@@ -12,6 +12,21 @@ jobs:
         with:
           fetch-depth: 0 # all history for all tags and branches
 
+      - name: print before tag
+        run: |
+          echo The PR was merged main
+          echo " GITHUB_JOB ${GITHUB_JOB}"
+          echo " GITHUB_EVENT_NAME ${GITHUB_EVENT_NAME}"
+          echo " github.event_name ${{ github.event_name }}"
+          echo ""
+          echo "this PR GITHUB_REF ${GITHUB_REF}"
+          echo "this PR github.ref ${{ github.ref }}"
+          echo ""
+          echo "this PR github.base_ref ${{ github.base_ref }}"
+          echo "this PR github.head_ref ${{ github.head_ref }}"
+          echo "this PR github.event.pull_request.base.sha main ${{ github.event.pull_request.base.sha || 'main' }}"
+          echo "this PR github.event.pull_request.head.sha github.ref ${{ github.event.pull_request.head.sha || github.ref }}"
+
       - name: Configure committer
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
@@ -27,8 +42,8 @@ jobs:
 
       - name: get-action-standard-version-out
         run: |
-          - echo ${{ steps.create-standard-version.outputs.release-tag-name }}
-          - echo ${{ steps.create-standard-version.outputs.release-tag-short }}
+          - echo "outputs.release-tag-name   ${{ steps.create-standard-version.outputs.release-tag-name }}"
+          - echo "outputs.release-tag-short  ${{ steps.create-standard-version.outputs.release-tag-short }}"
 
       # - name: Push change and tag
       #   run: |
@@ -42,3 +57,28 @@ jobs:
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
       #     branch: ${{ github.ref }}
       #     tags: true
+
+  check-tag-standard-version:
+    runs-on: ubuntu-latest
+    needs:
+      - tag-standard-version
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3 # https://github.com/actions/checkout
+        with:
+          fetch-depth: 0 # all history for all tags and branches
+
+      - name: print after tag
+        run: |
+          echo The PR was merged main
+          echo " GITHUB_JOB ${GITHUB_JOB}"
+          echo " GITHUB_EVENT_NAME ${GITHUB_EVENT_NAME}"
+          echo " github.event_name ${{ github.event_name }}"
+          echo ""
+          echo "this PR GITHUB_REF ${GITHUB_REF}"
+          echo "this PR github.ref ${{ github.ref }}"
+          echo ""
+          echo "this PR github.base_ref ${{ github.base_ref }}"
+          echo "this PR github.head_ref ${{ github.head_ref }}"
+          echo "this PR github.event.pull_request.base.sha main ${{ github.event.pull_request.base.sha || 'main' }}"
+          echo "this PR github.event.pull_request.head.sha github.ref ${{ github.event.pull_request.head.sha || github.ref }}"
