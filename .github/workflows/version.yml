@@ -47,6 +47,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: print env
+        run: |
+          echo " GITHUB_SHA ${GITHUB_SHA}"
+          echo " GITHUB_REF_TYPE ${GITHUB_REF_TYPE}"
+          echo " GITHUB_REF ${GITHUB_REF}"
+
       - name: get hash
         uses: benjlevesque/short-sha@v2.2
         id: short-sha

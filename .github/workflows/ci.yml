@@ -20,6 +20,7 @@ on:
     branches:
       - 'main'
       - 'release-*'
+      - 'iteration-*'
       - 'FE-*'
       - 'BF-*'
       - 'PU-*'
@@ -31,56 +32,6 @@ permissions:
   discussions: write
 
 jobs:
-  info_print:
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo " CI ${CI}"
-          echo " GITHUB_ACTIONS ${GITHUB_ACTIONS}"
-          echo " GITHUB_ACTION ${GITHUB_ACTION}"
-          echo " RUNNER_DEBUG ${RUNNER_DEBUG}"
-          echo " RUNNER_OS ${RUNNER_OS}"
-          echo " runner.os ${{ runner.os }}"
-          echo " RUNNER_ARCH ${RUNNER_ARCH}"
-          echo ""
-          echo " GITHUB_JOB ${GITHUB_JOB}"
-          echo " GITHUB_EVENT_NAME ${GITHUB_EVENT_NAME}"
-          echo " github.event_name ${{ github.event_name }}"
-          echo " github.event.pusher.name ${{ github.event.pusher.name }}"
-          echo " github.event.pusher.email ${{ github.event.pusher.email }}"
-          echo " github.event.sender.name ${{ github.event.sender.name }}"
-          echo " github.event.sender.email ${{ github.event.sender.email }}"
-          echo ""
-          echo " GITHUB_SHA ${GITHUB_SHA}"
-          echo " GITHUB_REF_TYPE ${GITHUB_REF_TYPE}"
-          echo " GITHUB_REF ${GITHUB_REF}"
-          echo " github.ref ${{ github.ref }}"
-          echo " GITHUB_REF_NAME ${GITHUB_REF_NAME}"
-          echo " GITHUB_BASE_REF ${GITHUB_BASE_REF}"
-          echo " github.base_ref ${{ github.base_ref }}"
-          echo " GITHUB_HEAD_REF ${GITHUB_HEAD_REF}"
-          echo " github.head_ref ${{ github.head_ref }}"
-          echo ""
-          echo " github.event.pull_request.title ${{ github.event.pull_request.title }}"
-          echo " github.event.pull_request.state ${{ github.event.pull_request.state }}"
-          echo " github.event.pull_request.merged ${{ github.event.pull_request.merged }}"
-          echo ""
-          echo " GITHUB_REPOSITORY ${GITHUB_REPOSITORY}"
-          echo " GITHUB_REPOSITORY_OWNER ${GITHUB_REPOSITORY_OWNER}"
-
-
-  if-merged-main:
-    if: ${{ github.event.pull_request.merged == true && github.base_ref == 'main' }}
-    runs-on: ubuntu-latest
-    steps:
-    - run: |
-        echo The PR was merged main
-        echo "this PR GITHUB_REF ${GITHUB_REF}"
-        echo "this PR github.event_name ${{ github.event_name }}"
-        echo "this PR github.ref ${{ github.ref }}"
-        echo "this PR github.base_ref ${{ github.base_ref }}"
-        echo "this PR github.head_ref ${{ github.head_ref }}"
-
   version:
     name: version
     uses: ./.github/workflows/version.yml
@@ -97,24 +48,24 @@ jobs:
       upload_artifact_name: biz-folder
       tag_name: ${{ needs.version.outputs.tag_name }}
 
-  tag-from-pr-main:
+  deploy-tag-push:
     needs:
       - version
       - biz-folder
-    if: ${{ github.event.pull_request.merged == true && github.base_ref == 'main' }}
-    uses: ./.github/workflows/tag-from-pr.yml
-    secrets: inherit
-
-  deploy-tag:
-    needs:
-      - version
-      - biz-folder
-    name: deploy-tag
+    name: deploy-tag-push
+    if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
     uses: ./.github/workflows/deploy-tag.yml
-    if: startsWith(github.ref, 'refs/tags/')
     secrets: inherit
     with:
       prerelease: true
       tag_name: ${{ needs.version.outputs.tag_name }}
       tag_changes: ${{ needs.version.outputs.tag_changes }}
       download_artifact_name: biz-folder
+
+  tag-from-pr-merged-main:
+    needs:
+      - version
+      - biz-folder
+    if: ${{ github.event.pull_request.merged == true && github.base_ref == 'main' }}
+    uses: ./.github/workflows/tag-from-pr.yml
+    secrets: inherit
