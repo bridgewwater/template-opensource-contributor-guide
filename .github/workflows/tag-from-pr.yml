@@ -19,14 +19,21 @@ jobs:
 
       - name: create-standard-version
         uses: convention-change/action-standard-version@main
+        id: create-standard-version
         with:
           release-by-ref: ${{ github.head_ref }}
-          # dry-run: true
+          push-changes-and-tag: false
+          dry-run: true
 
-      - name: Push change and tag
+      - name: get-action-standard-version-out
         run: |
-          git config --local --add safe.directory .
-          git push --follow-tags origin ${{ github.ref }}
+          - echo ${{ steps.create-standard-version.outputs.release-tag-name }}
+          - echo ${{ steps.create-standard-version.outputs.release-tag-short }}
+
+      # - name: Push change and tag
+      #   run: |
+      #     git config --local --add safe.directory .
+      #     git push --follow-tags origin ${{ github.ref }}
 
       # - name: Push changes
       #   uses: ad-m/github-push-action@master
