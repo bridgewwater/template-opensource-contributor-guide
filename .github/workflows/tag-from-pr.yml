@@ -2,10 +2,20 @@ name: tag-from-pr
 
 on:
   workflow_call: # https://docs.github.com/actions/using-workflows/reusing-workflows#using-inputs-and-secrets-in-a-reusable-workflow
+    outputs:
+      create_tag_name:
+        description: 'tag name, if not tag will null'
+        value: ${{ jobs.tag-standard-version.outputs.release-tag-name }}
+      create_tag_short_name:
+        description: 'tag name, if not tag will null'
+        value: ${{ jobs.tag-standard-version.outputs.release-tag-short }}
 
 jobs:
   tag-standard-version:
     runs-on: ubuntu-latest
+    outputs:
+      release-tag-name: ${{ steps.create-standard-version.outputs.release-tag-name }}
+      release-tag-short: ${{ steps.create-standard-version.outputs.release-tag-short }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3 # https://github.com/actions/checkout
@@ -37,7 +47,7 @@ jobs:
         id: create-standard-version
         with:
           release-by-ref: ${{ github.head_ref }}
-          push-changes-and-tag: false
+          push-changes-and-tag: true
           dry-run: true
 
       - name: get-action-standard-version-out
@@ -82,3 +92,10 @@ jobs:
           echo "this PR github.head_ref ${{ github.head_ref }}"
           echo "this PR github.event.pull_request.base.sha main ${{ github.event.pull_request.base.sha || 'main' }}"
           echo "this PR github.event.pull_request.head.sha github.ref ${{ github.event.pull_request.head.sha || github.ref }}"
+
+      # - name: get changelog
+      #   id: changelog_reader
+      #   uses: artlaman/conventional-changelog-reader-action@v1.1.0
+      #   with:
+      #     version: "${{ env.ACTION_STANDARD_VERSION_RELEASE_TAG_NAME }}"
+      #     path: ./CHANGELOG.md
