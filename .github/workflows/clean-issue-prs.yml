@@ -2,7 +2,7 @@ name: 'Close stale issues and PRs'
 
 on:
   schedule:
-    - cron: '30 1 * * *'
+    - cron: '0 08 * * 0' # At 08:00 on Sunday
 
 permissions:
   contents: write # only for delete-branch option

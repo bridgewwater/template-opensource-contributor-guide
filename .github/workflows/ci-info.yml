@@ -4,6 +4,10 @@ on:
   push:
     paths-ignore:
       - '**/README.md'
+    branches:
+      - '*'
+    tags:
+      - '*'
   pull_request:
     paths-ignore:
       - '**/README.md'
@@ -11,6 +15,8 @@ on:
       - opened
       - reopened
       - closed
+    branches:
+      - '*'
 
 jobs:
   info_print:
