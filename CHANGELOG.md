@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.6.0 (2023-07-25)
+
+* Merge pull request #25 from bridgewwater/release-1.6.0 ([aa49b8f](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/aa49b8f)), closes [#25](https://github.com/bridgewwater/template-opensource-contributor-guide/issues/25)
+* Merge pull request #27 from bridgewwater/release-1.6.0 ([d8938ee](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/d8938ee)), closes [#27](https://github.com/bridgewwater/template-opensource-contributor-guide/issues/27)
+* Merge pull request #28 from bridgewwater/release-1.6.0 ([59bca68](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/59bca68)), closes [#28](https://github.com/bridgewwater/template-opensource-contributor-guide/issues/28)
+* Merge pull request #30 from bridgewwater/release-1.6.0 ([940457a](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/940457a)), closes [#30](https://github.com/bridgewwater/template-opensource-contributor-guide/issues/30)
+* Merge pull request #31 from bridgewwater/release-1.6.0 ([0d521bb](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/0d521bb)), closes [#31](https://github.com/bridgewwater/template-opensource-contributor-guide/issues/31)
+* ci: add some check of tag-from-pr ([bcf9566](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/bcf9566))
+* ci: fix error of get-action-standard-version-out ([7b0a19d](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/7b0a19d))
+* ci: open create-standard-version push-changes-and-tag ([9833fbe](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/9833fbe))
+* ci: open release by pr close ([40b6bf4](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/40b6bf4))
+* feat: change ci-info and less at ci.yml at github action ([904890e](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/904890e))
+* feat: change schedule of clean-issue-prs.yml ([a9cac9e](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/a9cac9e))
+* feat: update print at pr ([377f7aa](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/377f7aa))
+* fix: update get-action-standard-version-out ([ed8adc4](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/ed8adc4))
+
+
+
 ### [1.5.1](https://github.com/bridgewwater/template-opensource-contributor-guide/compare/v1.5.0...v1.5.1) (2023-07-23)
 
 ## 1.5.0 (2023-07-23)
