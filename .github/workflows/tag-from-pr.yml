@@ -42,8 +42,8 @@ jobs:
 
       - name: get-action-standard-version-out
         run: |
-          - echo "outputs.release-tag-name   ${{ steps.create-standard-version.outputs.release-tag-name }}"
-          - echo "outputs.release-tag-short  ${{ steps.create-standard-version.outputs.release-tag-short }}"
+          echo "outputs.release-tag-name   ${{ steps.create-standard-version.outputs.release-tag-name }}"
+          echo "outputs.release-tag-short  ${{ steps.create-standard-version.outputs.release-tag-short }}"
 
       # - name: Push change and tag
       #   run: |
