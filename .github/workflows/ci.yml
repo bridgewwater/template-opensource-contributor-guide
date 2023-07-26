@@ -62,10 +62,10 @@ jobs:
       tag_changes: ${{ needs.version.outputs.tag_changes }}
       download_artifact_name: biz-folder
 
-  tag-from-pr-merged-main:
-    needs:
-      - version
-      - biz-folder
-    if: ${{ github.event.pull_request.merged == true && github.base_ref == 'main' }}
-    uses: ./.github/workflows/tag-from-pr.yml
-    secrets: inherit
+  # tag-from-pr-merged-main:
+  #   needs:
+  #     - version
+  #     - biz-folder
+  #   if: ${{ github.event.pull_request.merged == true && github.base_ref == 'main' }}
+  #   uses: ./.github/workflows/tag-from-pr.yml
+  #   secrets: inherit
