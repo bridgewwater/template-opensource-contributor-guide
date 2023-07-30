@@ -42,8 +42,8 @@ jobs:
       tag_name: ${{ steps.check-version.outputs.tag-version }}
       cc_version: ${{ steps.check-version.outputs.cc-latest-version }}
       cc_date: ${{ steps.check-version.outputs.cc-latest-date }}
-      cc_changes: ${{ steps.check-version.outputs.cc-latest-status }}
-      cc_status: ${{ steps.check-version.outputs.cc-latest-changes-log }}
+      cc_changes: ${{ steps.check-version.outputs.cc-latest-changes-log }}
+      cc_status: ${{ steps.check-version.outputs.cc-latest-status }}
 
     steps:
       - name: Checkout
