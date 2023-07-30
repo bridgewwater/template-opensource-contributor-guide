@@ -59,7 +59,7 @@ jobs:
     with:
       prerelease: true
       tag_name: ${{ needs.version.outputs.tag_name }}
-      tag_changes: ${{ needs.version.outputs.tag_changes }}
+      tag_changes: ${{ needs.version.outputs.cc_changes }}
       download_artifact_name: biz-folder
 
   # tag-from-pr-merged-main:
