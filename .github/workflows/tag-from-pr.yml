@@ -18,7 +18,7 @@ jobs:
       release-tag-short: ${{ steps.create-standard-version.outputs.release-tag-short }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3 # https://github.com/actions/checkout
+        uses: actions/checkout@v4 # https://github.com/actions/checkout
         with:
           fetch-depth: 0 # all history for all tags and branches
 
@@ -74,7 +74,7 @@ jobs:
       - tag-standard-version
     steps:
       - name: Checkout
-        uses: actions/checkout@v3 # https://github.com/actions/checkout
+        uses: actions/checkout@v4 # https://github.com/actions/checkout
         with:
           fetch-depth: 0 # all history for all tags and branches
 
