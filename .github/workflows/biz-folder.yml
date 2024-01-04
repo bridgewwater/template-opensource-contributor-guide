@@ -89,7 +89,7 @@ jobs:
 
       - name: upload-artifact
         uses: actions/upload-artifact@v4
-        if: ${{ inputs.upload_artifact_name != null }}
+        if: ${{ inputs.upload_artifact_name != null && inputs.tag_name != null}}
         with:
           name: ${{ inputs.upload_artifact_name }}
           retention-days: 5
