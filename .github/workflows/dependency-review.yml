@@ -24,7 +24,7 @@ jobs:
       -
         uses: actions/checkout@v4
       - name: 'Dependency Review' # https://github.com/actions/dependency-review-action
-        uses: actions/dependency-review-action@v3
+        uses: actions/dependency-review-action@v4
         with:
           fail-on-severity: moderate # low, moderate, high, critical. Default value low
           base-ref: ${{ github.event.pull_request.base.sha || 'main' }}
