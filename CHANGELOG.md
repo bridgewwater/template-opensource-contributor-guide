@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [convention-change-log](https://github.com/convention-change/convention-change-log) for commit guidelines.
 
+## [1.8.0](https://github.com/bridgewwater/template-opensource-contributor-guide/compare/1.7.0...v1.8.0) (2024-05-12)
+
+### ✨ Features
+
+* add `check github context` at version ([1ccdb127](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/1ccdb1271d6e11b3c804965798d0658a77a6dd4f))
+
+* change to convention-change/conventional-version-check@v1.2.0 ([d20b4b31](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/d20b4b31629cb64835dcf20bf9fa444a73e0d463))
+
+* update github aciton version.yml ([ce72cc54](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/ce72cc54f0e1e78a0564f0ff8efcb488b06670fb))
+
+### 👷‍ Build System
+
+* bump convention-change/conventional-version-check ([1d50f639](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/1d50f639b8f7bb5c886b37c259433e412dc60d59))
+
+* bump benjlevesque/short-sha from 2.2 to 3.0 ([2a3d8f10](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/2a3d8f102af530646d639217661bb30ee606c2cc))
+
+* bump actions/dependency-review-action from 3 to 4 ([5e6d7801](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/5e6d7801654a29f94ccb2820646b546c43afa908))
+
+* bump actions/upload-artifact from 3 to 4 ([77468af9](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/77468af94bd9278a6ff119934349b30fe0af7c0b))
+
+* bump actions/stale from 8 to 9 ([b367cc1a](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/b367cc1a8a4921f04a58a18e1230e9b325297ba8))
+
+* bump actions/download-artifact from 3 to 4 ([c132499a](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/c132499a2ef467280610134be9dbf2b45ef961fc))
+
+* bump actions/checkout from 3 to 4 ([9a1b56c2](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/9a1b56c26544b9ea17952d96bf3cb6e88d9a3be6))
+
+* update build kit version ([987cd3ca](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/987cd3ca461349a743554bcf2b1a389f864c278d))
+
+* remove print at cc-latest-changes-log, some echo print will let workflow error ([0bce2a2a](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/0bce2a2a0dec9fb390a1b6d510ab8ccd111fc215))
+
 ## [1.7.0](https://github.com/bridgewwater/template-opensource-contributor-guide/compare/1.6.0...v1.7.0) (2023-07-30)
 
 ### ✨ Features
