@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [convention-change-log](https://github.com/convention-change/convention-change-log) for commit guidelines.
 
+## [1.8.1](https://github.com/bridgewwater/template-opensource-contributor-guide/compare/1.8.0...v1.8.1) (2024-05-12)
+
+### 🐛 Bug Fixes
+
+* support `actions/download-artifact@v4` and `upload-artfact@v4` ([c10ab2ba](https://github.com/bridgewwater/template-opensource-contributor-guide/commit/c10ab2ba08287094394b36db523a091e49cdc70a))
+
 ## [1.8.0](https://github.com/bridgewwater/template-opensource-contributor-guide/compare/1.7.0...v1.8.0) (2024-05-12)
 
 ### ✨ Features
