@@ -44,7 +44,7 @@ jobs:
       upload_url: ${{ steps.get_release.outputs.upload_url }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: get hash
         uses: benjlevesque/short-sha@v3.0
